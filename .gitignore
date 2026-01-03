@@ -1,0 +1,137 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging / PyInstaller
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+*.manifest
+*.spec
+
+# PyInstaller
+*.exe
+dist/
+build/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage / testing
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+.coverage
+htmlcov/
+.tox/
+.nox/
+.pytest_cache/
+.hypothesis/
+
+# Translations
+*.mo
+*.pot
+
+# IDEs / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Dependency dirs
+node_modules/
+.pnp
+.pnp.js
+
+# Production builds
+dist/
+build/
+frontend/web/dist/
+frontend/electron/dist/
+
+# Yarn
+.yarn/cache
+.yarn/unplugged
+.yarn/webpack
+
+# Database
+*.db
+*.sqlite3
+*.sqlite3-journal
+
+# Jupyter
+.ipynb_checkpoints
+.ipynb
+
+# Mac
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Electron
+electron-debug.log
+electron-log.txt
+
+# npm
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

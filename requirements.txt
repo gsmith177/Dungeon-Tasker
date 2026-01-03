@@ -1,0 +1,18 @@
+# Core API
+fastapi[standard]==0.128.0
+uvicorn[standard]==0.40.0
+
+# Data / DB (you can swap later)
+SQLAlchemy==2.0.36
+
+# Pydantic models
+pydantic==2.9.2
+pydantic-settings==2.5.2
+
+# Audio / AI (placeholders for later work)
+whisper-timestamped==1.15.9
+sentence-transformers==5.2.0
+chromadb==1.4.0
+
+# Utilities
+python-dotenv==1.0.1
