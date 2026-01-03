@@ -10,9 +10,9 @@ This is a basic dnd compation app that will do the following:
 
 5: ai text generated from recordings (an easy way to search for specific parts of the recording). For example, i can go to the recording and search for the word “cave” and any time any member of the party said “cave” it would be highlighted.
 
-6. Story management, an easy way to manage major plot points of the story and display them.
+6: Story management, an easy way to manage major plot points of the story and display them.
 
-7. a widget format- a customizable layout that can be altered based on what is needed. I want this to work similarly to the way windows allows users to create multiple desktops for different situations. I want to make one layout for combat, one for story telling and npc interaction, and one for puzzles.
+7: a widget format- a customizable layout that can be altered based on what is needed. I want this to work similarly to the way windows allows users to create multiple desktops for different situations. I want to make one layout for combat, one for story telling and npc interaction, and one for puzzles.
 
 
 To run the app, first install python (version 3.12.10), then run the following commands in the terminal (on windows):
