@@ -15,9 +15,14 @@ This is a basic dnd compation app that will do the following:
 7: a widget format- a customizable layout that can be altered based on what is needed. I want this to work similarly to the way windows allows users to create multiple desktops for different situations. I want to make one layout for combat, one for story telling and npc interaction, and one for puzzles.
 
 
-To run the app, first install python (version 3.12.10), then run the following commands in the terminal (on windows):
+To run the app, first install python (v3.12.10) and npm (v10.9.2), then run the following commands in the terminal (on windows):
 
 ```
 python -m venv .venv
 .\.venv\Scripts\activate
+
+pip install -r requirements.txt
+
+npm run dev
 ```
+

@@ -1,4 +1,3 @@
-// frontend/electron/main/main.ts
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
 import { spawn, ChildProcessWithoutNullStreams } from "child_process";
@@ -7,22 +6,32 @@ let mainWindow: BrowserWindow | null = null;
 let backendProcess: ChildProcessWithoutNullStreams | null = null;
 
 function startBackend() {
-  // Dev: run `python -m uvicorn app.main:app`
-  // In production: replace with path to PyInstaller-built exe.
-  const backendCmd = process.env.BACKEND_CMD || "python";
-  const backendArgs =
-    process.env.BACKEND_ARGS?.split(" ") || ["-m", "uvicorn", "app.main:app", "--host", "127.0.0.1", "--port", "8000"];
+  const ROOT_PATH = "B:\\DEV\\DND Projects\\Dungeon-Tasker";
+  const pythonPath = `${ROOT_PATH}\\.venv\\Scripts\\python.exe`;
+  const backendPath = `${ROOT_PATH}\\backend`;
+  
+  console.log(`Python: ${pythonPath}`);
+  console.log(`Backend: ${backendPath}`);
 
-  backendProcess = spawn(backendCmd, backendArgs, {
-    cwd: path.join(__dirname, "../../../backend"),
-    shell: process.platform === "win32",
+  backendProcess = spawn(pythonPath, [
+    "-m", "uvicorn", 
+    "app.main:app", 
+    "--host", "127.0.0.1", 
+    "--port", "8000"
+  ], {
+    cwd: backendPath,
+    shell: false
   });
 
-  backendProcess.stdout.on("data", (data) => {
+  backendProcess.on('error', (err) => {
+    console.error('[SPAWN ERROR]', err.message);
+  });
+
+  backendProcess.stdout?.on("data", (data) => {
     console.log(`[backend] ${data}`);
   });
 
-  backendProcess.stderr.on("data", (data) => {
+  backendProcess.stderr?.on("data", (data) => {
     console.error(`[backend] ${data}`);
   });
 
@@ -31,17 +40,18 @@ function startBackend() {
   });
 }
 
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1400,
     height: 900,
     webPreferences: {
-      preload: path.join(__dirname, "../preload/preload.js"),
-    },
+      preload: path.join(__dirname, "../preload/preload.js")
+    }
   });
 
   const startUrl =
-    process.env.ELECTRON_START_URL || "http://localhost:5173"; // dev Vite port
+    process.env.ELECTRON_START_URL || "http://localhost:5173";
 
   mainWindow.loadURL(startUrl);
 
@@ -50,9 +60,15 @@ function createWindow() {
   });
 }
 
-app.on("ready", () => {
+app.whenReady().then(() => {
   startBackend();
   createWindow();
+
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
 });
 
 app.on("window-all-closed", () => {
@@ -62,11 +78,5 @@ app.on("window-all-closed", () => {
   }
   if (process.platform !== "darwin") {
     app.quit();
-  }
-});
-
-app.on("activate", () => {
-  if (mainWindow === null) {
-    createWindow();
   }
 });

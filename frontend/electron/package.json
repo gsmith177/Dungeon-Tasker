@@ -1,18 +1,15 @@
 {
-  "name": "electron",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "dnd-companion-electron",
+  "version": "0.0.1",
+  "main": "dist/main/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "start": "npm run build && electron ."
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
   "devDependencies": {
-    "@types/node": "^25.0.3",
-    "electron": "^39.2.7",
+    "electron": "^31.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.0.0",
+    "@types/node": "^22.0.0"
   }
 }
