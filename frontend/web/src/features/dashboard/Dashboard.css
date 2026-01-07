@@ -1,0 +1,167 @@
+/* Full viewport chain */
+html, body, #root, .app-root {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  font-size: 16px; /* Base for rem calculations */
+}
+
+/* Ensure body stretches and becomes flex container */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Root and app-root stretch to fill viewport */
+#root, .app-root {
+  flex: 1;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Dynamically fit columns based on available width */
+  grid-template-rows: auto 1fr 1fr 1fr; /* Row 1 auto, rows 2-4 expand equally */
+  gap: 0.5vh 0.5vw; /* Dynamic gap */
+  flex: 1;
+  width: 100%;
+  padding: 0.5vh;
+  box-sizing: border-box;
+  background: #111;
+  color: #111;
+}
+
+.cell {
+  background: #f3f3f3;
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.875rem;
+  min-height: 0; /* Critical: allows flex to shrink children below content size */
+}
+
+/* Direct wrapper div inside cell - must be flex container to control children */
+.cell > div:first-child {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  min-width: 0; /* Critical: allows flex to shrink children below content size */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Form elements always fit within cell bounds */
+.cell input,
+.cell textarea,
+.cell button,
+.cell select {
+  box-sizing: border-box;
+  max-width: 100%;
+  min-width: 0; /* Prevent overflow with padding */
+  font-size: 0.8125rem;
+  padding: 0.25rem 0.35rem;
+}
+
+/* Standard spacing for widget elements */
+.cell h2 {
+  margin: 0 0 0.4rem 0;
+  font-size: 1rem;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cell h3 {
+  margin: 0 0 0 0;
+  font-size: 0.875rem;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cell p,
+.cell li {
+  margin: 0 0;
+  font-size: 0.8125rem;
+  min-width: 0;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.cell input[type="text"],
+.cell input[type="range"],
+.cell textarea,
+.cell button {
+  width: 100%;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.cell textarea {
+  resize: vertical;
+  min-height: 3rem;
+  max-height: 5rem;
+}
+
+.cell button {
+  margin-bottom: 0.35rem;
+  padding: 0.35rem 0.5rem;
+  height: 1.75rem;
+}
+
+.cell input[type="text"],
+.cell input[type="password"],
+.cell input[type="email"] {
+  height: 1.625rem;
+  margin-bottom: 0.35rem;
+}
+
+.cell input[type="range"] {
+  margin-bottom: 0.35rem;
+  height: 1.25rem;
+}
+
+.cell label {
+  margin-bottom: 0.35rem;
+  display: block;
+  font-size: 0.8125rem;
+}
+
+.cell > div + div,
+.cell > label + label {
+  margin-top: 0.35rem;
+}
+
+/* Widget content wrapper - constrain to available space */
+.widget-content {
+  flex: 1;
+  min-height: 0;
+  min-width: 0;
+  overflow-y: auto;
+  overflow-x: none;
+}
+
+/* Row assignments - matches your screenshot */
+.cell-header      { grid-row: 1; grid-column: 1; }
+.cell-view-label  { grid-row: 1; grid-column: 2; display: flex; align-items: center; justify-content: center; }
+.cell-audio       { grid-row: 1; grid-column: 3; }
+
+.cell-music       { grid-row: 2; grid-column: 1; }
+.cell-player-stats{ grid-row: 2; grid-column: 2; }
+.cell-rules       { grid-row: 2; grid-column: 3; }
+
+.cell-puzzles     { grid-row: 3; grid-column: 1; }
+.cell-encounters  { grid-row: 3; grid-column: 2; }
+.cell-encounter-maker { grid-row: 3; grid-column: 3; }
+
+.cell-view-switcher { grid-row: 4; grid-column: 1; }
+.cell-story         { grid-row: 4; grid-column: 2; }
+.cell-story-graph   { grid-row: 4; grid-column: 3; }

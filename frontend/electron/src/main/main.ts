@@ -1,4 +1,5 @@
 import { app, BrowserWindow } from "electron";
+import { screen } from "electron";
 import * as path from "path";
 import { spawn, ChildProcessWithoutNullStreams } from "child_process";
 
@@ -42,23 +43,32 @@ function startBackend() {
 
 
 function createWindow() {
+  const primaryDisplay = screen.getPrimaryDisplay();
+  const { width, height } = primaryDisplay.workAreaSize;
+  
   mainWindow = new BrowserWindow({
-    width: 1400,
-    height: 900,
+    show: false,  // Hide until sized
+    x: 0,
+    y: 0,
+    width,
+    height,
+    useContentSize: true,
     webPreferences: {
       preload: path.join(__dirname, "../preload/preload.js")
-    }
+    },
+    frame: false,
+    resizable: true,
   });
-
-  const startUrl =
-    process.env.ELECTRON_START_URL || "http://localhost:5173";
-
+  
+  const startUrl = process.env.ELECTRON_START_URL || "http://localhost:5173";
   mainWindow.loadURL(startUrl);
 
-  mainWindow.on("closed", () => {
-    mainWindow = null;
+  mainWindow.once("ready-to-show", () => {
+    mainWindow?.show();
+    mainWindow?.maximize();  // Windows snap will work
   });
 }
+
 
 app.whenReady().then(() => {
   startBackend();

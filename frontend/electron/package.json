@@ -7,9 +7,10 @@
     "start": "npm run build && electron ."
   },
   "devDependencies": {
+    "@types/electron": "^1.4.38",
+    "@types/node": "^22.0.0",
     "electron": "^31.0.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.0.0",
-    "@types/node": "^22.0.0"
+    "typescript": "^5.0.0"
   }
 }
