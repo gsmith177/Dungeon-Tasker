@@ -30,6 +30,7 @@
   /* 10. Text entry field */
   --input-bg: #AB9B96;
   --input-placeholder: #432E36;
+  --input-text: #260C1A;
 }
 
 html, body, #root, .app-root {
@@ -214,7 +215,7 @@ h1.app-title {
 .cell input,
 .cell textarea {
   background: var(--input-bg);
-  color: var(--text);
+  color: var(--input-text);
 }
 .cell input::placeholder,
 .cell textarea::placeholder {
