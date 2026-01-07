@@ -1,4 +1,37 @@
-/* Full viewport chain */
+/* Color tokens and Full viewport chain */
+:root {
+  /* 1. Background (under and between widgets) */
+  --background: #442C22;
+
+  /* 2. Widget background */
+  --widget-bg: #634133;
+
+  /* 3. Title text (main app title) */
+  --title-text: #F0E7D8;
+
+  /* 4. Widget title text */
+  --widget-title: #F0E7D8;
+
+  /* 5. Default text */
+  --text: #AB9B96;
+
+  /* 6/7. Button background & text (three options) */
+  --btn-bg-1: #260C1A; --btn-text-1: #F0E7D8;
+  --btn-bg-2: #777DA7; --btn-text-2: #F0E7D8;
+  --btn-bg-3: #984447; --btn-text-3: #F0E7D8;
+
+  /* 8. Slider color */
+  --slider-color: #432E36;
+
+  /* 9. Scrollbar colors */
+  --scrollbar-bg: #260C1A;
+  --scrollbar-thumb: #432E36;
+
+  /* 10. Text entry field */
+  --input-bg: #AB9B96;
+  --input-placeholder: #432E36;
+}
+
 html, body, #root, .app-root {
   margin: 0;
   padding: 0;
@@ -6,6 +39,8 @@ html, body, #root, .app-root {
   width: 100%;
   overflow: hidden;
   font-size: 16px; /* Base for rem calculations */
+  background: var(--background);
+  color: var(--text);
 }
 
 /* Ensure body stretches and becomes flex container */
@@ -31,16 +66,16 @@ body {
   width: 100%;
   padding: 0.5vh;
   box-sizing: border-box;
-  background: #111;
-  color: #111;
+  background: transparent; /* show the root/background color between widgets */
+  color: inherit;
 }
 
 .cell {
-  background: #f3f3f3;
-  border: 1px solid #ccc;
+  background: var(--widget-bg);
+  border: none;
   padding: 0.5rem;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: auto; /* allow the cell itself to scroll if content exceeds */
   display: flex;
   flex-direction: column;
   font-size: 0.875rem;
@@ -54,7 +89,7 @@ body {
   flex: 1;
   min-height: 0;
   min-width: 0; /* Critical: allows flex to shrink children below content size */
-  overflow-y: auto;
+  overflow-y: visible;
   overflow-x: hidden;
 }
 
@@ -121,7 +156,7 @@ body {
 .cell input[type="password"],
 .cell input[type="email"] {
   height: 1.625rem;
-  margin-bottom: 0.35rem;
+  margin-bottom: 0rem;
 }
 
 .cell input[type="range"] {
@@ -146,8 +181,86 @@ body {
   min-height: 0;
   min-width: 0;
   overflow-y: auto;
-  overflow-x: none;
+  overflow-x: hidden;
 }
+
+/* Graph preview matches input background and placeholder color */
+.graph-preview {
+  background: var(--input-bg);
+  color: var(--input-placeholder);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 4px;
+  min-height: 3rem;
+}
+
+/* Color mappings for titles, inputs, buttons, sliders, and scrollbars */
+h1.app-title {
+  color: var(--title-text);
+}
+
+.cell {
+  color: var(--text);
+}
+
+.cell h2 {
+  color: var(--widget-title);
+}
+
+/* Inputs/textareas */
+.cell input,
+.cell textarea {
+  background: var(--input-bg);
+  color: var(--text);
+}
+.cell input::placeholder,
+.cell textarea::placeholder {
+  color: var(--input-placeholder);
+  opacity: 1;
+}
+
+/* Buttons - default and utility classes */
+.cell button {
+  background: var(--btn-bg-1);
+  color: var(--btn-text-1);
+  border: none;
+  border-radius: 4px;
+}
+.btn-2 { background: var(--btn-bg-2); color: var(--btn-text-2); }
+.btn-3 { background: var(--btn-bg-3); color: var(--btn-text-3); }
+
+/* Slider styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  background: rgba(0,0,0,0.12);
+  border-radius: 999px;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  margin-top: -4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--slider-color);
+}
+input[type="range"]::-moz-range-track { background: rgba(0,0,0,0.12); height:6px; border-radius:999px; }
+input[type="range"]::-moz-range-thumb { width:14px; height:14px; border-radius:50%; background:var(--slider-color); }
+
+/* Scrollbar styling (WebKit) */
+*::-webkit-scrollbar { width: 10px; height: 10px; }
+*::-webkit-scrollbar-track { background: var(--scrollbar-bg); }
+*::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: 6px; }
+
+/* Firefox scrollbar */
+* { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); }
 
 /* Row assignments - matches your screenshot */
 .cell-header      { grid-row: 1; grid-column: 1; }
