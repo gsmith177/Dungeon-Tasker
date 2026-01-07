@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from "electron";
-import { screen } from "electron";
+import { screen, ipcMain, shell } from "electron";
 import * as path from "path";
+import * as fs from "fs";
 import { spawn, ChildProcessWithoutNullStreams } from "child_process";
 
 let mainWindow: BrowserWindow | null = null;
@@ -73,6 +74,63 @@ function createWindow() {
 app.whenReady().then(() => {
   startBackend();
   createWindow();
+
+  // IPC handler to save recordings
+  ipcMain.on("save-recording", (event, { fileName, blob, recordingPath }) => {
+    try {
+      const dataDir = path.join(path.dirname(app.getAppPath()), "data", "recordings");
+      const fullPath = path.join(dataDir, fileName);
+
+      // Create directory if it doesn't exist
+      if (!fs.existsSync(dataDir)) {
+        fs.mkdirSync(dataDir, { recursive: true });
+      }
+
+      // Convert blob to buffer and save
+      blob.arrayBuffer().then((arrayBuffer: ArrayBuffer) => {
+        const buffer = Buffer.from(arrayBuffer);
+        fs.writeFileSync(fullPath, buffer);
+        console.log(`Recording saved: ${fullPath}`);
+      });
+    } catch (error) {
+      console.error("Error saving recording:", error);
+    }
+  });
+
+  // IPC handler to open file location
+  ipcMain.on("show-file-location", (event, { filePath }) => {
+    try {
+      const dataDir = path.join(path.dirname(app.getAppPath()), "data", "recordings");
+      const fullPath = path.join(dataDir, path.basename(filePath));
+      
+      // Check if file exists
+      if (fs.existsSync(fullPath)) {
+        shell.showItemInFolder(fullPath);
+      } else {
+        console.error(`File not found: ${fullPath}`);
+      }
+    } catch (error) {
+      console.error("Error opening file location:", error);
+    }
+  });
+
+  // IPC handler to open and play recording
+  ipcMain.on("open-recording", (event, { filePath }) => {
+    try {
+      const dataDir = path.join(path.dirname(app.getAppPath()), "data", "recordings");
+      const fullPath = path.join(dataDir, path.basename(filePath));
+      
+      // Check if file exists
+      if (fs.existsSync(fullPath)) {
+        // Open with default media player
+        shell.openPath(fullPath);
+      } else {
+        console.error(`File not found: ${fullPath}`);
+      }
+    } catch (error) {
+      console.error("Error opening recording:", error);
+    }
+  });
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {

@@ -148,9 +148,9 @@ body {
 }
 
 .cell button {
-  margin-bottom: 0.35rem;
-  padding: 0.35rem 0.5rem;
-  height: 1.75rem;
+  margin-bottom: 0.25rem;
+  padding: 0.2rem 0.4rem;
+  height: 1.4rem;
 }
 
 .cell input[type="text"],
@@ -216,6 +216,11 @@ h1.app-title {
 .cell textarea {
   background: var(--input-bg);
   color: var(--input-text);
+}
+.cell select {
+  background: var(--widget-bg);
+  color: var(--text);
+  border: 1px solid var(--btn-bg-1);
 }
 .cell input::placeholder,
 .cell textarea::placeholder {
