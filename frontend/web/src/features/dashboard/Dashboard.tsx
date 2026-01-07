@@ -18,9 +18,6 @@ export const Dashboard = () => {
       <div className="cell cell-header">
         <HeaderWidget />
       </div>
-      <div className="cell cell-view-label">
-        <div className="view-label">(Default View)</div>
-      </div>
       <div className="cell cell-audio">
         <AudioRecordingWidget />
       </div>

@@ -264,8 +264,7 @@ input[type="range"]::-moz-range-thumb { width:14px; height:14px; border-radius:5
 * { scrollbar-width: thin; scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-bg); }
 
 /* Row assignments - matches your screenshot */
-.cell-header      { grid-row: 1; grid-column: 1; }
-.cell-view-label  { grid-row: 1; grid-column: 2; display: flex; align-items: center; justify-content: center; }
+.cell-header      { grid-row: 1; grid-column: 1 / span 2; }
 .cell-audio       { grid-row: 1; grid-column: 3; }
 
 .cell-music       { grid-row: 2; grid-column: 1; }
