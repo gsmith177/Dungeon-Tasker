@@ -139,3 +139,6 @@ yarn-error.log*
 # Ignore all recording files, but keep the directory placeholder
 Dungeon-Tasker/data/recordings/*
 !Dungeon-Tasker/data/recordings/.gitkeep
+
+# ignore saved workspace
+Dungeon-Tasker.code-workspace
