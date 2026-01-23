@@ -4,7 +4,7 @@
   top: 0;
   left: 0;
   right: 0;
-  height: 8px;                 /* Drag from top 8px */
+  height: 24px;                 
   -webkit-app-region: drag;    /* This is what moves the window */
   z-index: 1000;
 }
@@ -60,19 +60,3 @@
   height: 100%;
 }
 
-.resize-grip {
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  width: 16px;
-  height: 16px;
-  background: linear-gradient(
-    135deg,
-    transparent 0,
-    transparent 50%,
-    #666 50%,
-    #666 100%
-  );
-  opacity: 0.5;
-  pointer-events: none;
-}

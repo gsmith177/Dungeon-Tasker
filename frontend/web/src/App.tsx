@@ -7,7 +7,7 @@ function App() {
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
-      const nearTop = e.clientY <= 32; // show bar when mouse is near top
+      const nearTop = e.clientY <= 25;
       setShowTitleBar(nearTop);
     };
 
@@ -29,8 +29,6 @@ function App() {
       <div className="app-content">
         <Dashboard />
       </div>
-
-      <div className="resize-grip" />
     </div>
   );
 }
